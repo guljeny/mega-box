@@ -1,0 +1,31 @@
+{
+  "name": "simple-state",
+  "description": "Easy, lightweight and powerful state management tool",
+  "version": "1.0.0",
+  "repository": "github:guljeny/simple-state",
+  "main": "dist/state.js",
+  "scripts": {
+    "prepare": "npm run build",
+    "test": "npx jest",
+    "build": "npx tsc",
+    "lint": "npx eslint ./src"
+  },
+  "author": "Yauheni Hul",
+  "keywords": [
+    "state",
+    "state manager",
+    "redux",
+    "mobx"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.13",
+    "eslint": "9.9.1",
+    "eslint-config-soft": "^1.0.5",
+    "ts-jest": "^29.2.5"
+  },
+  "dependencies": {
+    "jest": "^29.7.0",
+    "typescript": "^5.6.2"
+  }
+}
