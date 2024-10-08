@@ -11,17 +11,33 @@ Easy, lightweight and powerful state management tool designed as redux or mobX r
 # Why megaBox? 
 
 - No reducers and middleware hell for large projects 
-- Simple use with smart listener execution optimisation inside
+- Simple usage and small api but smart optimisation inside
 - No boilerplate code
 - Easy to share store cross prjects or packages
 
 # Usage 
+
+`megaBox(initialState: Object, plugins?: { [name]: (state: Object) => unknown })`
 
 Start with creating sate:
 
 ```
 const initailState = { userName: 'Jack John', userId: 123 };
 const appState = megaBox(initialState);
+```
+
+Plugins can be passed by second argument. Each plugin is function which get state as single argument.
+
+```
+const onUserIdChange = state => (cb: () => void) => {
+    return state.subscribe(cb, ['userId']);
+}
+
+const appState = megaBox(initialState, { onUserIdChange });
+
+appState.onUserIdChange(() => {
+    console.log('UserId is changed and this handled by plugin');
+});
 ```
 
 ### Read value
@@ -54,7 +70,8 @@ appState.put({ user: 'John Smith', userId: 987 });
 
 `appState.subscribe(callback, filter?: string[] | false)`
 
-> Avoid to setting few values without `put` - every single change will call subscriber separately.
+> Avoid to writing more than one value by setting them in state. Use `put` instead.  
+  Every single write in state will call callback separately.
 
 `callback` - required. Will be called immediately after subscription and when state changes. Callback receive `actual state` as first argument and `boolean` as second argument. Boolean specify if it called first time (`true`) or after something change (`false`).
 

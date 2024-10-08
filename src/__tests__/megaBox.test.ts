@@ -91,4 +91,43 @@ describe('state', () => {
     expect(subscriber).toHaveBeenCalledWith({ foo: 2, bar: 'new bar' }, false);
     unsubscribe();
   });
+
+  it('Register plugin', () => {
+    const subscriber = jest.fn();
+
+    const plugin = jest.fn(state => () => {
+      const unsubscribe = state.subscribe(subscriber, ['foo']);
+
+      return unsubscribe;
+    });
+
+    const s = megaBox({ foo: 1 }, {
+      fooSub: plugin,
+    });
+
+    expect(plugin).toHaveBeenCalledTimes(0);
+    expect(subscriber).toHaveBeenCalledTimes(0);
+
+    s.foo = 2;
+
+    expect(plugin).toHaveBeenCalledTimes(0);
+    expect(subscriber).toHaveBeenCalledTimes(0);
+
+    const unsubPlugin = s.fooSub();
+
+    expect(plugin).toHaveBeenCalledTimes(1);
+    expect(subscriber).toHaveBeenCalledTimes(1);
+
+    s.foo = 3;
+
+    expect(plugin).toHaveBeenCalledTimes(1);
+    expect(subscriber).toHaveBeenCalledTimes(2);
+
+    unsubPlugin();
+
+    s.foo = 4;
+
+    expect(plugin).toHaveBeenCalledTimes(1);
+    expect(subscriber).toHaveBeenCalledTimes(2);
+  });
 });

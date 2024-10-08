@@ -14,7 +14,12 @@ interface IListener<T> {
   cb: TSub<T>;
 }
 
-export const megaBox = <T extends object>(initail: T) => {
+type TPlugin<T, R = unknown> = (state: TProxiedManager<T>) => R;
+
+export const megaBox = <T extends object, N extends Record<string, TPlugin<T>>>(
+  initail: T,
+  plugins?: N,
+) => {
   let listeners: IListener<T>[] = [];
   let state = initail;
 
@@ -57,7 +62,7 @@ export const megaBox = <T extends object>(initail: T) => {
     notify(Object.keys(half));
   };
 
-  return new Proxy({}, {
+  const proxy = new Proxy({}, {
     set: function (_, key, value) {
       state[key] = value;
       notify([String(key)]);
@@ -68,8 +73,11 @@ export const megaBox = <T extends object>(initail: T) => {
       if (key === 'put') return put;
       if (key === 'subscribe') return subscribe;
       if (key === 'unsubscribe') return unsubscribe;
+      if (plugins?.[String(key)]) return plugins[String(key)](proxy);
 
       return state[key];
     },
-  }) as TProxiedManager<T>;
+  }) as TProxiedManager<T> & {[K in keyof N]: ReturnType<N[K]>;};
+
+  return proxy;
 };
