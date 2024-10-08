@@ -1,9 +1,9 @@
 {
   "name": "mega-box",
   "description": "Easy, lightweight and powerful state management tool",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "github:guljeny/mega-box",
-  "main": "dist/state.js",
+  "main": "dist/megaBox.js",
   "scripts": {
     "prepare": "npm run build",
     "test": "npx jest",

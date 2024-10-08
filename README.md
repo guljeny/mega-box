@@ -1,14 +1,14 @@
-# Simple state
+# Mega Box
 
-[![NPM](https://nodei.co/npm/simple-state.png?mini=true)](https://www.npmjs.com/package/simple-state)
+[![NPM](https://nodei.co/npm/mega-box.png?mini=true)](https://www.npmjs.com/package/mega-box)
 
 Easy, lightweight and powerful state management tool designed as redux or mobX replacement.
 
 ## Install
 
-`npm i -s simple-state`
+`npm i -s mega-box`
 
-# Why simple state? 
+# Why megaBox? 
 
 - No reducers and middleware hell for large projects 
 - Simple use with smart listener execution optimisation inside
@@ -21,7 +21,7 @@ Start with creating sate:
 
 ```
 const initailState = { userName: 'Jack John', userId: 123 };
-const appState = simpleState(initialState);
+const appState = megaBox(initialState);
 ```
 
 ### Read value
@@ -62,9 +62,9 @@ appState.put({ user: 'John Smith', userId: 987 });
 
 - `false` - will disable filter at all and callback will be called every update
 - `string[]` - specify keys to track changes
-- Leave it empty to let `simpleState` automaticaly solve when call callback
+- Leave it empty to let `megaBox` automaticaly solve when call callback
 
-SimpleState remember which values used in first subscriber callback call and optimize performance by calling callback only when those values are changed. 
+MegaBox remember which values used in first subscriber callback call and optimize performance by calling callback only when those values are changed. 
 
 > Use state distructurization and read required values at the start of callback function.  
   Avoid getting values in conditions, some conditions can be scipped at the first call and lead to bugs when listener don’t call when value is changed. 

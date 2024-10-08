@@ -14,7 +14,7 @@ interface IListener<T> {
   cb: TSub<T>;
 }
 
-export const simpleState = <T extends object>(initail: T) => {
+export const megaBox = <T extends object>(initail: T) => {
   let listeners: IListener<T>[] = [];
   let state = initail;
 
