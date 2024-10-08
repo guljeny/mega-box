@@ -1,4 +1,4 @@
-type TSub<T> = (half: Partial<T>, init: boolean) => void;
+type TSub<T> = (half: T, init: boolean) => void;
 type TUnsub = () => void;
 
 type TProxiedManager<T = {}> = T & {

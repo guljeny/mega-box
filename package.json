@@ -1,7 +1,7 @@
 {
   "name": "mega-box",
   "description": "Easy, lightweight and powerful state management tool",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "repository": "github:guljeny/mega-box",
   "main": "dist/megaBox.js",
   "scripts": {
@@ -19,13 +19,13 @@
   ],
   "license": "ISC",
   "devDependencies": {
+    "typescript": "^5.6.2",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
     "@types/jest": "^29.5.13",
     "eslint": "9.9.1",
-    "eslint-config-soft": "^1.0.5",
-    "ts-jest": "^29.2.5"
+    "eslint-config-soft": "^1.0.5"
   },
   "dependencies": {
-    "jest": "^29.7.0",
-    "typescript": "^5.6.2"
   }
 }
